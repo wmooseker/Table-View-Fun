@@ -8,14 +8,37 @@
 
 import UIKit
 
+// MARK: - Persistent Data Storage
+// so far, any changes the user makes to our data will be persisted across different runs of the app
+// two main types of persistent data storages
+// 1. local
+// 2. remote
+
+// there are few options for iOS local data persistence
+// 1. UserDefaults: key value storage for simple data types
+// use UserDefaults to store a high score or a user setting like a theme or music volume setting
+// 2. Archiving: reading and writing Codable objects to the file system
+// when you need to update only one object in a file, you have to load and write the entire file
+// not very efficient when your file is large
+// 3. Use a SQLite database
+// 4. Core Data: an Apple framework for an OOP wrapper to a data store. By default the data store on iOS for Core Data is a SQLite database
+
+// options to consider for remote data persistence
+// Realm, Firebase, set up your own server, Parse Server
+
 class DogTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
-    var dogs = [Dog]()
+    var dogs = [Dog]() {
+        didSet {
+            Dog.saveToFile(dogs: dogs)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print(Dog.dogPListURL)
         initializeDogs()
     }
 
