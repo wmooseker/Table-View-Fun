@@ -41,6 +41,16 @@ class Dog: Codable {
         }
     }
     
+    static func loadFromFile() -> [Dog]? {
+        let plistDecoder = PropertyListDecoder()
+        
+        if let dogsData = try? Data(contentsOf: dogPListURL), let decodedDogs = try? plistDecoder.decode([Dog].self, from: dogsData) {
+            return decodedDogs
+        }
+        return nil
+    }
+    // task: call loadFromFile() appropriately
+    
     init(name: String, breed: String) {
         self.name = name
         self.breed = breed

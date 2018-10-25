@@ -43,9 +43,14 @@ class DogTableViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func initializeDogs() {
-        dogs.append(Dog(name: "Lassie", breed: "Collie"))
-        dogs.append(Dog(name: "AirBud", breed: "Retriever"))
-        dogs.append(Dog(name: "Clifford", breed: "BigRedDog"))
+        if let dogs = Dog.loadFromFile() {
+            self.dogs = dogs
+        }
+        else {
+            dogs.append(Dog(name: "Lassie", breed: "Collie"))
+            dogs.append(Dog(name: "AirBud", breed: "Retriever"))
+            dogs.append(Dog(name: "Clifford", breed: "BigRedDog"))
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
