@@ -8,6 +8,17 @@
 
 import UIKit
 
+// MARK: - Table Views
+// 2 different ways to setup a VC with a table view
+// 1. add a table view to your view controller scene
+// manually register your view controller as the table view's delegate and data source
+// this approach allows you to add other views to your scene, not just a single table view
+// 2. use a UITableViewController, which abstracts a lot of the management for you
+// you can only have a table view as the root view for your view controller scene
+// we'll do option 1 because ADS did 2
+
+
+
 // MARK: - Persistent Data Storage
 // so far, any changes the user makes to our data will be persisted across different runs of the app
 // two main types of persistent data storages
